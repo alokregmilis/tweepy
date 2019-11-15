@@ -60,7 +60,7 @@ class Model(object):
             a result set of model instances.
         """
         results = ResultSet()
-
+        next_token = ''
         if isinstance(json_list, dict):
             # Handle map parameter for statuses/lookup
             if 'id' in json_list:
