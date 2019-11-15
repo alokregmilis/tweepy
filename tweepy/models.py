@@ -71,13 +71,15 @@ class Model(object):
                         results.append(cls.parse(api, {'id': int(_id)}))
                 return results
             # Handle premium search
+            if 'next' in json_list:
+                next_token = json_list['next']
             if 'results' in json_list:
                 json_list = json_list['results']
 
         for obj in json_list:
             if obj:
                 results.append(cls.parse(api, obj))
-        return results
+        return results, next_token
 
     def __repr__(self):
         state = ['%s=%s' % (k, repr(v)) for (k, v) in vars(self).items()]
